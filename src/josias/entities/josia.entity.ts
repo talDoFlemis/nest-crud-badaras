@@ -7,5 +7,5 @@ export class Josias4Real {
   @ValidateIf((o) => o.operational_type !== '')
   @IsIn(['focused', 'serious', 'geponto'])
   @IsString()
-  mood: string;
+  mood = 'focused';
 }
