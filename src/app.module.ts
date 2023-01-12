@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { JosiasModule } from './josias/josias.module';
+import { TobaianorModule } from './tobaianor/tobaianor.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { JosiasModule } from './josias/josias.module';
       autoLoadEntities: true,
       synchronize: true,
     }),
+    TobaianorModule,
   ],
 })
 export class AppModule {}
