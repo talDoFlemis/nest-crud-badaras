@@ -11,6 +11,6 @@ export class JosiasModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
       .apply(NopeMenSova)
-      .forRoutes({ path: '*', method: RequestMethod.DELETE });
+      .forRoutes({ path: 'josias/*', method: RequestMethod.DELETE });
   }
 }
