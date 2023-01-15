@@ -4,26 +4,29 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import databaseConfig from 'config/database.config';
 import { validate } from 'config/env.validation';
 import { DataSourceOptions } from 'typeorm';
-import { JosiasModule } from './josias/josias.module';
 import { TobaianorModule } from './tobaianor/tobaianor.module';
+import { CacheModule } from './cache/cache.module';
+import { JosiasModule } from './josias/josias.module';
+import cacheConfig from 'config/cache.config';
 
 @Module({
   imports: [
-    JosiasModule,
-    TobaianorModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+      cache: true,
+      load: [databaseConfig, cacheConfig],
+      validate,
+    }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => {
+      useFactory: async (configService: ConfigService) => {
         return configService.get<DataSourceOptions>('database');
       },
       inject: [ConfigService],
     }),
-    ConfigModule.forRoot({
-      isGlobal: true,
-      cache: true,
-      load: [databaseConfig],
-      validate,
-    }),
+    JosiasModule,
+    TobaianorModule,
+    CacheModule,
   ],
 })
 export class AppModule {}

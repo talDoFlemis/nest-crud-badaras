@@ -2,9 +2,11 @@ import { plainToInstance } from 'class-transformer';
 import {
   IsBoolean,
   IsEnum,
+  IsInt,
   IsNumber,
   IsOptional,
   IsString,
+  ValidateIf,
   validateSync,
 } from 'class-validator';
 
@@ -13,6 +15,11 @@ enum Environment {
   Production = 'production',
   Test = 'test',
   Provision = 'provision',
+}
+
+enum CacheStore {
+  Redis = 'redis',
+  inMemory = 'memory',
 }
 
 class EnvironmentVariables {
@@ -24,7 +31,7 @@ class EnvironmentVariables {
 
   //DATABASE
   @IsOptional()
-  @IsNumber()
+  @IsInt()
   DATABASE_PORT: number;
 
   @IsString()
@@ -42,6 +49,26 @@ class EnvironmentVariables {
   @IsOptional()
   @IsBoolean()
   DATABASE_SYNCHRONIZE: boolean;
+
+  //Cache
+  @IsEnum(CacheStore)
+  CACHE_STORE: CacheStore;
+
+  @IsString()
+  @ValidateIf((o) => o.CACHE_STORE === CacheStore.Redis)
+  CACHE_HOST: string;
+
+  @IsInt()
+  @ValidateIf((o) => o.CACHE_STORE === CacheStore.Redis)
+  CACHE_PORT: number;
+
+  @IsOptional()
+  @IsInt()
+  CACHE_TTL: number;
+
+  @IsOptional()
+  @IsInt()
+  CACHE_MAX: number;
 }
 
 export function validate(config: Record<string, unknown>) {
