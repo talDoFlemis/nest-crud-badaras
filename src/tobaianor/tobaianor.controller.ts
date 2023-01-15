@@ -8,10 +8,16 @@ import {
   Delete,
   ValidationPipe,
   UsePipes,
+  CacheInterceptor,
+  UseInterceptors,
 } from '@nestjs/common';
 import { TobaianorService } from './tobaianor.service';
 import { CreateTobaianorDto } from './dto/create-tobaianor.dto';
 import { UpdateTobaianorDto } from './dto/update-tobaianor.dto';
+
+function timeout(delay: number) {
+  return new Promise((res) => setTimeout(res, delay));
+}
 
 @Controller('tobaianor')
 @UsePipes(new ValidationPipe({ transform: true }))
@@ -26,8 +32,10 @@ export class TobaianorController {
     return this.tobaianorService.create(createTobaianorDto);
   }
 
+  @UseInterceptors(CacheInterceptor)
   @Get()
-  findAll() {
+  async findAll() {
+    await timeout(500);
     return this.tobaianorService.findAll();
   }
 
