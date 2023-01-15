@@ -8,7 +8,7 @@ export default registerAs('database', () => ({
   username: process.env.DATABASE_USERNAME,
   password: process.env.DATABASE_PASSWORD,
   autoLoadEntities: true,
-  synchronize: process.env.DATABASE_SYNCHRONIZE || false,
+  synchronize: process.env.DATABASE_SYNCHRONIZE === 'true' || false,
   migrationsTableName: 'migration',
   migrations: ['dist/migration/*{.ts,.js}'],
   cli: { migrationsDir: 'src/migration' },
