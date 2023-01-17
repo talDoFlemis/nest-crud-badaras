@@ -14,7 +14,7 @@ import { JosiasGuard } from './guards/josias.guard';
 import { Josias4Real } from './entities/josia.entity';
 
 @UseGuards(JosiasGuard)
-@Controller('josias')
+@Controller({ path: 'josias', version: '1' })
 export class JosiasController {
   constructor(private readonly josiasService: JosiasService) {}
 

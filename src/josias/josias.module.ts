@@ -9,8 +9,10 @@ import { NopeMenSova } from './middleware/nope.middleware';
 })
 export class JosiasModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(NopeMenSova)
-      .forRoutes({ path: 'josias/*', method: RequestMethod.DELETE });
+    consumer.apply(NopeMenSova).forRoutes({
+      path: 'josias',
+      method: RequestMethod.DELETE,
+      version: '1',
+    });
   }
 }
