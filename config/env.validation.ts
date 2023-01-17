@@ -69,6 +69,12 @@ class EnvironmentVariables {
   @IsOptional()
   @IsInt()
   CACHE_MAX: number;
+
+  //BullMQ
+  @IsString()
+  BULL_HOST: string;
+  @IsInt()
+  BULL_PORT: number;
 }
 
 export function validate(config: Record<string, unknown>) {

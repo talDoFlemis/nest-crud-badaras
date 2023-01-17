@@ -10,6 +10,7 @@ import { JosiasModule } from './josias/josias.module';
 import cacheConfig from 'config/cache.config';
 import { ScheduleModule } from '@nestjs/schedule';
 import { SuaMaeModule } from './suamae/suamae.module';
+import { BullModule, BullModuleOptions } from '@nestjs/bull';
 
 @Module({
   imports: [
@@ -27,6 +28,13 @@ import { SuaMaeModule } from './suamae/suamae.module';
       inject: [ConfigService],
     }),
     ScheduleModule.forRoot(),
+    BullModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => {
+        return configService.get<BullModuleOptions>('bull');
+      },
+      inject: [ConfigService],
+    }),
     JosiasModule,
     TobaianorModule,
     CacheModule,
