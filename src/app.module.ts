@@ -8,6 +8,7 @@ import { TobaianorModule } from './tobaianor/tobaianor.module';
 import { CacheModule } from './cache/cache.module';
 import { JosiasModule } from './josias/josias.module';
 import cacheConfig from 'config/cache.config';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import cacheConfig from 'config/cache.config';
       },
       inject: [ConfigService],
     }),
+    ScheduleModule.forRoot(),
     JosiasModule,
     TobaianorModule,
     CacheModule,
