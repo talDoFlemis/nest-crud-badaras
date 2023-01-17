@@ -9,6 +9,7 @@ import { CacheModule } from './cache/cache.module';
 import { JosiasModule } from './josias/josias.module';
 import cacheConfig from 'config/cache.config';
 import { ScheduleModule } from '@nestjs/schedule';
+import { SuaMaeModule } from './suamae/suamae.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     JosiasModule,
     TobaianorModule,
     CacheModule,
+    SuaMaeModule,
   ],
 })
 export class AppModule {}
