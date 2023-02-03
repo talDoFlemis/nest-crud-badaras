@@ -6,5 +6,11 @@ pipeline{
         sh 'echo "Running Linting"'
       }
     }
+
+    stage('Build') {
+      steps {
+        sh 'echo "Running Build 2"'
+      }
+    }
   }
 }
