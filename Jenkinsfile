@@ -1,9 +1,13 @@
 pipeline{
   agent any;
+  tools{
+    nodejs("18/lts")
+  }
+
   stages{
-    stage('Linting') {
+    stage('Install Dependencies') {
       steps {
-        sh 'echo "Running Linting"'
+        sh 'npm --version'
       }
     }
 
