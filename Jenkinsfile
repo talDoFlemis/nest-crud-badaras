@@ -7,31 +7,31 @@ pipeline{
   stages{
     stage('Install Dependencies') {
       steps {
-        sh 'npm ci'
+        sh 'yarn install'
       }
     }
 
     stage('Build') {
       steps {
-        sh 'npm run build'
+        sh 'yarn build'
       }
     }
 
     stage('Format Code') {
       steps {
-        sh 'npm run format'
+        sh 'yarn format'
       }
     }
 
     stage('Lint Code') {
       steps {
-        sh 'npm run lint'
+        sh 'yarn lint'
       }
     }
 
     stage('Unit tests') {
       steps {
-        sh 'npm run test'
+        sh 'yarn test'
       }
     }
   }
